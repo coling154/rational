@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
-#include <bits/stdc++.h>
+#include <string>
 using namespace std;
 class rational
 {
@@ -28,6 +28,9 @@ private:
     int getNum() { return numerator; }
     int getDen() { return denominator; }
 };
+
+int gcd(int a, int b);
+
 int main()
 {
     rational r1(15, 4);
@@ -169,6 +172,11 @@ void rational::input(istream &stream)
         simp();
     }
 }
+int gcd(int a, int b){
+    if (b == 0)
+       return a;
+    return gcd(b, a % b); 
+}
 
 // adds 2 rationals
 rational rational::add(rational toAdd)
@@ -212,9 +220,9 @@ void rational::simp()
     {
         cout << "Denominator can\'t be 0";
     }
-    int gcd = __gcd(numerator, denominator);
-    numerator = numerator / gcd;
-    denominator = denominator / gcd;
+    int gc = gcd(numerator, denominator);
+    numerator = numerator / gc;
+    denominator = denominator / gc;
     if (denominator < 0)
     {
         numerator = numerator * -1;
